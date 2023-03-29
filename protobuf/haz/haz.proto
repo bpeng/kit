@@ -1,9 +1,13 @@
 syntax = "proto3";
 
-package haz;
+package nz.org.geonet.quake.proto;
 option go_package = "./haz_pb";
+option java_package = "nz.org.geonet.quake.proto";
+option java_outer_classname = "Haz_pb";
+option java_multiple_files = false;
 
 // protoc --proto_path=protobuf/haz/ --go_out=./ protobuf/haz/haz.proto
+// protoc --proto_path=protobuf/haz/ --java_out=./java/ --kotlin_out=./kotlin/ protobuf/haz/haz.proto
 
 // Quake is for earthquake information.
 message Quake {
