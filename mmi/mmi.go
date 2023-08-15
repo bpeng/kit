@@ -21,7 +21,7 @@ func MMI(depth, magnitude float64) float64 {
 		m = 3.76 + 1.48*magnitude - 3.50*math.Log10(rupture*rupture*rupture)/3.0 + 0.0031*d
 	}
 
-	if m < 3.0 {
+	if m < 1.0 {
 		m = -1.0
 	}
 
@@ -40,6 +40,8 @@ func MMIDistance(depth, magnitude, distance float64) float64 {
 // MMIIntensity returns the string describing mmi.
 func MMIIntensity(mmi float64) string {
 	switch {
+	case mmi >= 8:
+		return "extreme"
 	case mmi >= 7:
 		return "severe"
 	case mmi >= 6:
@@ -50,6 +52,8 @@ func MMIIntensity(mmi float64) string {
 		return "light"
 	case mmi >= 3:
 		return "weak"
+	case mmi >= 2:
+		return "faint"
 	default:
 		return "unnoticeable"
 	}
@@ -58,6 +62,8 @@ func MMIIntensity(mmi float64) string {
 // IntensityMMI returns the minimum MMI for the intensity.
 func IntensityMMI(Intensity string) float64 {
 	switch Intensity {
+	case "extreme":
+		return 8
 	case "severe":
 		return 7
 	case "strong":
@@ -68,6 +74,10 @@ func IntensityMMI(Intensity string) float64 {
 		return 4
 	case "weak":
 		return 3
+	case "faint":
+		return 2
+	case "unnoticeable":
+		return 1
 	default:
 		return -9
 	}

@@ -76,14 +76,14 @@ func TestMMIIntensity(t *testing.T) {
 		mmi       float64
 		intensity string
 	}{
-		{id: loc(), mmi: 9.0, intensity: "severe"},
-		{id: loc(), mmi: 8.0, intensity: "severe"},
+		{id: loc(), mmi: 9.0, intensity: "extreme"},
+		{id: loc(), mmi: 8.0, intensity: "extreme"},
 		{id: loc(), mmi: 7.0, intensity: "severe"},
 		{id: loc(), mmi: 6.0, intensity: "strong"},
 		{id: loc(), mmi: 5.0, intensity: "moderate"},
 		{id: loc(), mmi: 4.0, intensity: "light"},
 		{id: loc(), mmi: 3.0, intensity: "weak"},
-		{id: loc(), mmi: 2.0, intensity: "unnoticeable"},
+		{id: loc(), mmi: 2.0, intensity: "faint"},
 		{id: loc(), mmi: 0.0, intensity: "unnoticeable"},
 		{id: loc(), mmi: -1.0, intensity: "unnoticeable"},
 	}
@@ -109,9 +109,9 @@ func TestIntensityMMI(t *testing.T) {
 		{id: loc(), mmi: 5.0, intensity: "moderate"},
 		{id: loc(), mmi: 4.0, intensity: "light"},
 		{id: loc(), mmi: 3.0, intensity: "weak"},
-		{id: loc(), mmi: -9.0, intensity: "unnoticeable"},
-		{id: loc(), mmi: -9.0, intensity: "unnoticeable"},
-		{id: loc(), mmi: -9.0, intensity: "unnoticeable"},
+		{id: loc(), mmi: 1, intensity: "unnoticeable"},
+		{id: loc(), mmi: 1, intensity: "unnoticeable"},
+		{id: loc(), mmi: 1, intensity: "unnoticeable"},
 	}
 
 	for _, v := range in {
