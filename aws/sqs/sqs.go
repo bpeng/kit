@@ -125,7 +125,8 @@ func (s *SQS) ReceiveWithContextAttributes(ctx context.Context, queueURL string,
 // receiveMessage is the common code used internally to receive an SQS message based
 // on the provided input.
 func (s *SQS) receiveMessage(ctx context.Context, input *sqs.ReceiveMessageInput) (Raw, error) {
-
+	const maxRetries = 3
+	retryCount := 0
 	for {
 		r, err := s.client.ReceiveMessage(ctx, input)
 		if err != nil {
@@ -134,7 +135,12 @@ func (s *SQS) receiveMessage(ctx context.Context, input *sqs.ReceiveMessageInput
 
 		switch {
 		case r == nil || len(r.Messages) == 0:
-			// no message received
+			// No message received
+			retryCount++
+			if retryCount >= maxRetries {
+				// return an error to the calling function which generally would continue the loop
+				return Raw{}, fmt.Errorf("no messages received after %d retries", maxRetries)
+			}
 			continue
 		case len(r.Messages) == 1:
 			raw := r.Messages[0]
